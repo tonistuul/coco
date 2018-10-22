@@ -1,0 +1,9 @@
+server:
+  port: 9701
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:15434/coco
+    username: coco
+    password: cocodev
