@@ -7,3 +7,6 @@ spring:
     url: jdbc:postgresql://localhost:15434/coco
     username: coco
     password: cocodev
+
+logging.file: logs/coco.log
+logging.file.max-history: 20
