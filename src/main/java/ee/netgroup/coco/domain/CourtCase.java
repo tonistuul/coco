@@ -3,12 +3,19 @@ package ee.netgroup.coco.domain;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 @Data
 @Builder
-public class Case {
+public class CourtCase {
+
+  @Id
+  @GeneratedValue
+  private Long id;
+
   private String status;
   private String paymentStatus = "PAID";
   private String caseNumber;
@@ -17,8 +24,6 @@ public class Case {
   private String judge;
   private String claimantId;
   private String defendantId;
-  private List<String> files;
-
   private String caseType;
   private String description;
   private String value;

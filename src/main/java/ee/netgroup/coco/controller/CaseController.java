@@ -1,11 +1,9 @@
 package ee.netgroup.coco.controller;
 
-import ee.netgroup.coco.domain.Case;
+import ee.netgroup.coco.domain.CourtCase;
+import ee.netgroup.coco.service.CaseService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -17,11 +15,12 @@ import static java.util.Arrays.asList;
 @AllArgsConstructor
 @RequestMapping("cases")
 public class CaseController {
+private CaseService caseService;
 
   @GetMapping("/byPerson/{personId}")
-  public Collection<Case> findAllByPerson(@PathVariable @NotNull String personId) {
+  public Collection<CourtCase> findAllByPerson(@PathVariable @NotNull String personId) {
     return asList(
-      Case.builder()
+      CourtCase.builder()
         .caseNumber("112-CIVI-2018")
         .claimantId(personId)
         .dateOfRegistration(LocalDate.now())
@@ -31,5 +30,10 @@ public class CaseController {
         .type("Contract dispute")
         .build()
     );
+  }
+
+  @PostMapping
+  public CourtCase saveCase (@RequestBody CourtCase courtCase) {
+    return caseService.saveCase(courtCase);
   }
 }
