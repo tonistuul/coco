@@ -29,6 +29,8 @@ dependencies {
   implementation('org.springframework.boot:spring-boot-starter-web')
   implementation('org.springframework.boot:spring-boot-starter-data-jpa')
   implementation('javax.xml.bind:jaxb-api')
+  implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+  implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
   runtimeOnly('org.postgresql:postgresql')
   compileOnly('org.projectlombok:lombok')
   compileOnly('org.postgresql:postgresql:42.0.0')
