@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("person")
+@RequestMapping("persons")
 public class PersonController {
   private PersonService personService;
 
