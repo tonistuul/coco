@@ -1,8 +1,7 @@
 server:
   port: 9701
   servlet:
-    path: coco-api
-
+    path: /coco-api
 
 spring:
   datasource:
