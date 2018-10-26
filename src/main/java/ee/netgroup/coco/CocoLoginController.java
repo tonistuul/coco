@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.UNSUPPORTED_MEDIA_TYPE;
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
@@ -29,7 +29,7 @@ public class CocoLoginController {
     @RequestParam(required = false) String username,
     @RequestParam(required = false) String password
   ) {
-    boolean authenticated = systemUserService.authenticate("John", "Wick");
-    return new ResponseEntity<>(UNSUPPORTED_MEDIA_TYPE);
+    boolean authenticated = systemUserService.authenticate(username, password);
+    return authenticated ? new ResponseEntity<>(OK) : new ResponseEntity<>(FORBIDDEN);
   }
 }
