@@ -1,6 +1,7 @@
 package ee.netgroup.coco.service;
 
 import ee.netgroup.coco.domain.Person;
+import ee.netgroup.coco.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,8 +9,12 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class PersonService {
   private LegalEntityService legalEntityService;
+  private PersonRepository personRepository;
 
   public Person getPerson(String personId) {
-    return Person.builder().personId(personId).legalEntities(legalEntityService.findWherePersonOnBoard(personId)).build();
+    Person result = personRepository.get(personId);
+    result.setLegalEntities(legalEntityService.findAllWherePersonOnBoard(personId));
+
+    return result;
   }
 }

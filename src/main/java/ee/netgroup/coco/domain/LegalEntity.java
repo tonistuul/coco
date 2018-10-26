@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class LegalEntity {
-  private String entityId;
+  private String registryCode;
   private String name;
 }
