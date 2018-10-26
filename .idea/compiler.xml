@@ -8,8 +8,8 @@
     <bytecodeTargetLevel target="10">
       <module name="c_main" target="1.10" />
       <module name="c_test" target="1.10" />
-      <module name="coco_main" target="1.10" />
-      <module name="coco_test" target="1.10" />
+      <module name="coco_main" target="1.8" />
+      <module name="coco_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
