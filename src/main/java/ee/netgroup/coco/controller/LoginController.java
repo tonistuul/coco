@@ -10,8 +10,9 @@ import ee.sk.smartid.AuthenticationIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.security.cert.CertificateException;
 
@@ -19,14 +20,14 @@ import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-public class CocoLoginController {
+public class LoginController {
 
   private final SystemUserService systemUserService;
   private final SmartIdService smartIdService;
 
   @Autowired
-  public CocoLoginController(SystemUserService systemUserService,
-                             SmartIdService smartIdService) {
+  public LoginController(SystemUserService systemUserService,
+                         SmartIdService smartIdService) {
     this.systemUserService = systemUserService;
     this.smartIdService = smartIdService;
   }
