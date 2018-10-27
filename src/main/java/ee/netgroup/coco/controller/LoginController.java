@@ -1,4 +1,4 @@
-package ee.netgroup.coco;
+package ee.netgroup.coco.controller;
 
 import ee.netgroup.coco.model.LoginRequest;
 import ee.netgroup.coco.model.PollRequest;
@@ -10,7 +10,8 @@ import ee.sk.smartid.AuthenticationIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.cert.CertificateException;
 

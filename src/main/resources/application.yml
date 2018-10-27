@@ -16,3 +16,8 @@ spring:
 
 logging.file: logs/coco.log
 logging.file.max-history: 20
+
+legalEntityRegistry:
+  url: http://africa.nortal.com/company-registry/api/v1
+personRegistry:
+  url: http://africa.nortal.com/person-registry
