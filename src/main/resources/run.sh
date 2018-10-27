@@ -1,5 +1,5 @@
 #!/bin/sh
-cd docker
+cd /opt/docker
 docker-compose down
 nohup docker-compose up &
 

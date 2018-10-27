@@ -22,7 +22,8 @@ public class LegalEntityService {
       .filter(le -> le.isOnBoard(personId))
       .map(dto -> LegalEntity.builder()
         .name(dto.getName())
-        .registryCode(dto.getCompanyId())
+        .registryCode(dto.getRegNumber())
+        .activities(dto.getActivities())
         .build())
       .collect(toList());
   }
