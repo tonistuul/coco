@@ -27,7 +27,7 @@ public class CaseController {
         .defendantId("asdads")
         .judge("Judy")
         .status("PENDING")
-        .type("Contract dispute")
+        .caseType("Contract dispute")
         .build()
     );
   }
