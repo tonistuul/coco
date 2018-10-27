@@ -1,15 +1,18 @@
 package ee.netgroup.coco;
 
-import ee.netgroup.coco.model.SystemUser;
-import ee.netgroup.coco.repository.SystemUserRepository;
+import ee.netgroup.coco.model.LoginRequest;
+import ee.netgroup.coco.model.PollRequest;
+import ee.netgroup.coco.model.UserIdentity;
+import ee.netgroup.coco.service.SmartId;
+import ee.netgroup.coco.service.SmartIdService;
 import ee.netgroup.coco.service.SystemUserService;
+import ee.sk.smartid.AuthenticationIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.security.cert.CertificateException;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -18,18 +21,40 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CocoLoginController {
 
   private final SystemUserService systemUserService;
+  private final SmartIdService smartIdService;
 
   @Autowired
-  public CocoLoginController(SystemUserService systemUserService) {
+  public CocoLoginController(SystemUserService systemUserService,
+                             SmartIdService smartIdService) {
     this.systemUserService = systemUserService;
+    this.smartIdService = smartIdService;
   }
 
-  @GetMapping(path = "login", produces = {APPLICATION_JSON_VALUE})
+  @CrossOrigin
+  @PostMapping(path = "login", produces = {APPLICATION_JSON_VALUE})
   public ResponseEntity login(
-    @RequestParam(required = false) String username,
-    @RequestParam(required = false) String password
+    @RequestBody LoginRequest loginRequest
   ) {
-    boolean authenticated = systemUserService.authenticate(username, password);
+    boolean authenticated = systemUserService.authenticate(loginRequest.getIdentityCode(), loginRequest.getPassword());
     return authenticated ? new ResponseEntity<>(OK) : new ResponseEntity<>(FORBIDDEN);
+  }
+
+
+  @CrossOrigin
+  @PostMapping(path = "smartid", produces = {APPLICATION_JSON_VALUE})
+  public ResponseEntity<SmartId> loginSmartId(
+    @RequestBody(required = false) UserIdentity userIdentity
+  ) throws CertificateException, InterruptedException {
+    SmartId smartId = smartIdService.initAuth(userIdentity.getIdentityCode());
+    return ResponseEntity.accepted().body(smartId);
+  }
+
+  @CrossOrigin
+  @PostMapping(path = "poll", produces = {APPLICATION_JSON_VALUE})
+  public ResponseEntity<AuthenticationIdentity> pollSmartId(
+    @RequestBody(required = false) PollRequest pollRequest
+  ) throws CertificateException, InterruptedException {
+    AuthenticationIdentity authenticationIdentity = smartIdService.validate(pollRequest.getSessionId());
+    return ResponseEntity.accepted().body(authenticationIdentity);
   }
 }

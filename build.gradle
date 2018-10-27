@@ -29,6 +29,11 @@ dependencies {
   implementation('org.springframework.boot:spring-boot-starter-actuator')
   implementation('org.springframework.boot:spring-boot-starter-web')
   implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+  compile group: 'ee.sk.smartid', name: 'smart-id-java-client', version: '1.0'
+  compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.24.1'
+  compile group: 'org.glassfish.jersey.core', name: 'jersey-common', version: '2.24.1'
+  compile group: 'org.glassfish.jersey.ext', name: 'jersey-entity-filtering', version: '2.24.1'
+  compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.24.1'
   implementation('javax.xml.bind:jaxb-api')
   runtimeOnly('org.postgresql:postgresql')
   compileOnly('org.projectlombok:lombok')

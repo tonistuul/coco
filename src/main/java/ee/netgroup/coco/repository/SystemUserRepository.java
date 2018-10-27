@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface SystemUserRepository extends JpaRepository<SystemUser, Long> {
-  SystemUser findFirstByUsernameAndPassword(String username, String password);
+  SystemUser findFirstByPersonalCodeAndPassword(String personalCode, String password);
 }
