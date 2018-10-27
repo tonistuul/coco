@@ -20,7 +20,6 @@ public class CourtCase {
   private String status;
   private String paymentStatus = "PAID";
   private String caseNumber;
-  private String type;
   private LocalDate dateOfRegistration;
   private String judge;
   private String claimantId;

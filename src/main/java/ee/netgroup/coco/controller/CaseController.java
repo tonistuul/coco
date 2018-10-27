@@ -37,7 +37,6 @@ public class CaseController {
     return caseService.findall();
   }
 
-
   @PostMapping
   public CourtCase saveCase(@RequestBody CourtCase courtCase) {
     return caseService.saveCase(courtCase);
