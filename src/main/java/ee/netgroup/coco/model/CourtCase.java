@@ -3,9 +3,10 @@ package ee.netgroup.coco.model;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Data
@@ -27,4 +28,5 @@ public class CourtCase {
   private String caseType;
   private String description;
   private String value;
-  private String fee;}
+  private String fee;
+}
