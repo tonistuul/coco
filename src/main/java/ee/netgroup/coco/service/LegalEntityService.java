@@ -20,11 +20,11 @@ public class LegalEntityService {
     return relations.stream()
       .map(relation -> legalEntityRepository.get(relation))
       .filter(le -> le.isOnBoard(personId))
-      .map(dto -> LegalEntity.builder()
-        .name(dto.getName())
-        .registryCode(dto.getRegNumber())
-        .activities(dto.getActivities())
-        .build())
+      .map(LegalEntity::toLegalEntity)
       .collect(toList());
+  }
+
+  public LegalEntity get(String entityId) {
+    return LegalEntity.toLegalEntity(legalEntityRepository.get(entityId));
   }
 }
