@@ -15,4 +15,4 @@ git fetch --all
 git reset --hard origin/master
 pkill java
 sh gradlew bootJar
-nohup java -jar -Dfile.encoding=UTF8 /build/libs/coco-0.0.1-SNAPSHOT.jar &
+nohup java -jar -Dfile.encoding=UTF8 build/libs/coco-0.0.1-SNAPSHOT.jar &
