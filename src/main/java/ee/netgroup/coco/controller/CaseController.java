@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 @RestController
 @AllArgsConstructor
@@ -41,14 +42,14 @@ public class CaseController {
   public Collection<CourtCase> findAll() {
     List<CourtCase> findall = caseService.findall();
     try {
-      List<CourtCase> collect = findall.stream().map(c -> {
-        if (c.getClaimant() != null && c.getDefendantId() != null) {
+      return findall.stream().map(c -> {
+        if (c.getClaimantId() != null && c.getDefendantId() != null) {
           c.setClaimant(legalEntityService.get(c.getClaimantId()));
           c.setDefendant(legalEntityService.get(c.getDefendantId()));
         }
         return c;
-      }).collect(Collectors.toList());
-      return collect;
+      })
+        .collect(toList());
     }
     catch (Exception e) {
       return findall;
