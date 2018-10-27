@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,5 +16,9 @@ public class CaseService {
   public CourtCase saveCase(CourtCase courtCase) {
     courtCase.setDateOfRegistration(LocalDate.now());
     return caseRepository.save(courtCase);
+  }
+
+  public List<CourtCase> findall() {
+    return caseRepository.findAll();
   }
 }

@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 @AllArgsConstructor
 @RequestMapping("cases")
 public class CaseController {
-private CaseService caseService;
+  private CaseService caseService;
 
   @GetMapping("/byPerson/{personId}")
   public Collection<CourtCase> findAllByPerson(@PathVariable @NotNull String personId) {
@@ -32,8 +32,14 @@ private CaseService caseService;
     );
   }
 
+  @GetMapping
+  public Collection<CourtCase> findAll() {
+    return caseService.findall();
+  }
+
+
   @PostMapping
-  public CourtCase saveCase (@RequestBody CourtCase courtCase) {
+  public CourtCase saveCase(@RequestBody CourtCase courtCase) {
     return caseService.saveCase(courtCase);
   }
 }
