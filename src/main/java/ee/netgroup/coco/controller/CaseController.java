@@ -2,12 +2,15 @@ package ee.netgroup.coco.controller;
 
 import ee.netgroup.coco.model.CourtCase;
 import ee.netgroup.coco.service.CaseService;
+import ee.netgroup.coco.service.LegalEntityService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -16,6 +19,8 @@ import static java.util.Arrays.asList;
 @RequestMapping("cases")
 public class CaseController {
   private CaseService caseService;
+  private LegalEntityService legalEntityService;
+
 
   @GetMapping("/byPerson/{personId}")
   public Collection<CourtCase> findAllByPerson(@PathVariable @NotNull String personId) {
@@ -34,7 +39,20 @@ public class CaseController {
 
   @GetMapping
   public Collection<CourtCase> findAll() {
-    return caseService.findall();
+    List<CourtCase> findall = caseService.findall();
+    try {
+      List<CourtCase> collect = findall.stream().map(c -> {
+        if (c.getClaimant() != null && c.getDefendantId() != null) {
+          c.setClaimant(legalEntityService.get(c.getClaimantId()));
+          c.setDefendant(legalEntityService.get(c.getDefendantId()));
+        }
+        return c;
+      }).collect(Collectors.toList());
+      return collect;
+    }
+    catch (Exception e) {
+      return findall;
+    }
   }
 
   @PostMapping

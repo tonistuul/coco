@@ -17,15 +17,18 @@ public class CourtCase {
   @GeneratedValue
   private Long id;
 
-  private String status;
-  private String paymentStatus = "PAID";
-  private String caseNumber;
+  private String status;//
+  private String paymentStatus = "PAID"; //
+  private String caseNumber;//
   private LocalDate dateOfRegistration;
   private String judge;
   private String claimantId;
   private String defendantId;
   private String caseType;
-  private String description;
+  private String description;//
   private String value;
-  private String fee;
+  private String fee;//
+
+  private LegalEntity claimant;
+  private LegalEntity defendant;
 }
