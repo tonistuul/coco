@@ -1,6 +1,6 @@
 package ee.netgroup.coco.service;
 
-import ee.netgroup.coco.domain.CourtCase;
+import ee.netgroup.coco.model.CourtCase;
 import ee.netgroup.coco.repository.CaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

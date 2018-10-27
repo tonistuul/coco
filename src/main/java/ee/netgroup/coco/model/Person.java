@@ -1,4 +1,4 @@
-package ee.netgroup.coco.domain;
+package ee.netgroup.coco.model;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +11,8 @@ import java.util.Collection;
 public class Person {
   private String personId;
   private String firstName;
-  private String middleName;
   private String lastName;
   private LocalDate dateOfBirth;
   private String address;
-  private String email;
   private Collection<LegalEntity> legalEntities;
 }

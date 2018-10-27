@@ -1,6 +1,6 @@
 package ee.netgroup.coco.controller;
 
-import ee.netgroup.coco.domain.CourtCase;
+import ee.netgroup.coco.model.CourtCase;
 import ee.netgroup.coco.service.CaseService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

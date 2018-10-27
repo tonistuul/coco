@@ -1,6 +1,6 @@
 package ee.netgroup.coco.repository;
 
-import ee.netgroup.coco.domain.Person;
+import ee.netgroup.coco.model.Person;
 import ee.netgroup.coco.dto.PersonDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;

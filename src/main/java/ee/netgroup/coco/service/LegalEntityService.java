@@ -1,6 +1,6 @@
 package ee.netgroup.coco.service;
 
-import ee.netgroup.coco.domain.LegalEntity;
+import ee.netgroup.coco.model.LegalEntity;
 import ee.netgroup.coco.repository.LegalEntityRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package ee.netgroup.coco.service;
 
-import ee.netgroup.coco.domain.Person;
+import ee.netgroup.coco.model.Person;
 import ee.netgroup.coco.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

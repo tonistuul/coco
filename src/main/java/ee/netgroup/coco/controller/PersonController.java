@@ -1,6 +1,6 @@
 package ee.netgroup.coco.controller;
 
-import ee.netgroup.coco.domain.Person;
+import ee.netgroup.coco.model.Person;
 import ee.netgroup.coco.service.PersonService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

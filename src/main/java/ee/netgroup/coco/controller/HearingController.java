@@ -1,6 +1,6 @@
 package ee.netgroup.coco.controller;
 
-import ee.netgroup.coco.domain.Hearing;
+import ee.netgroup.coco.model.Hearing;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,4 +1,4 @@
-package ee.netgroup.coco.domain;
+package ee.netgroup.coco.model;
 
 import lombok.Builder;
 import lombok.Data;
