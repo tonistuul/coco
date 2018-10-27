@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 
 @Entity
@@ -29,6 +30,8 @@ public class CourtCase {
   private String value;
   private String fee;//
 
+  @Transient
   private LegalEntity claimant;
+  @Transient
   private LegalEntity defendant;
 }
