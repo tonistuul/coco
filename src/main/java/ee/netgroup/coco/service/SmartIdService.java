@@ -18,6 +18,7 @@ public class SmartIdService {
   private static final String SERVER_URL = "https://sid.demo.sk.ee/smart-id-rp/v1";
 
   private SmartIdAuthenticationClient client;
+  private ExtendedAuthenticationRequestBuilder builder;
 
   public SmartIdService() {
     SmartIdAuthenticationClient client = new SmartIdAuthenticationClient();
@@ -25,6 +26,7 @@ public class SmartIdService {
     client.setRelyingPartyName(RELYING_PARTY_NAME);
     client.setHostUrl(SERVER_URL);
     this.client = client;
+    builder = client.createAuthentication();
   }
 
   public SmartId initAuth(String inputNationalIdentityNumber) throws CertificateException, InterruptedException {
@@ -37,7 +39,6 @@ public class SmartIdService {
     authenticationHash.setHashInBase64("K74MSLkafRuKZ1Ooucvh2xa4Q3nz+R/hFWIShN96SPHNcem+uQ6mFMe9kkJQqp5EaoZnJeaFpl310TmlzRgNyQ==");
     authenticationHash.setHashType(HashType.SHA512);
 
-    ExtendedAuthenticationRequestBuilder builder = client.createAuthentication();
     String sessionId = ((ExtendedAuthenticationRequestBuilder) builder
       .withNationalIdentity(identity)
       .withAuthenticationHash(authenticationHash)
@@ -52,24 +53,21 @@ public class SmartIdService {
   }
 
   public AuthenticationIdentity validate(String sessionId) throws InterruptedException, CertificateException {
-
-
     // session status short poll method
-    ExtendedAuthenticationRequestBuilder builder = client.createAuthentication();
     SessionStatus sessionStatus;
-
-    sessionStatus = builder.getSessionStatus(sessionId, TimeUnit.SECONDS, 1);
-    System.out.println(sessionStatus.getState());
-
-    if("RUNNING".equals(sessionStatus.getState())){
-      return null;
-    }
+    do {
+      Thread.sleep(1000);
+      // session status will respond in 1 second even if the authentication is not "COMPLETE"
+      sessionStatus = builder.getSessionStatus(sessionId, TimeUnit.SECONDS, 1);
+      System.out.println(sessionStatus.getState());
+    } while ("RUNNING".equals(sessionStatus.getState()));
 
     SmartIdAuthenticationResponse response = builder.getAuthenticationResponse(sessionStatus);
     AuthenticationResponseValidator validator = new AuthenticationResponseValidator();
     validator.addTrustedCACertificate(Base64.getDecoder().decode(CA_CERTIFICATE));
     SmartIdAuthenticationResult result = validator.validate(response);
 
+    // use this when you need information about the authenticated person
     return result.getAuthenticationIdentity();
   }
 

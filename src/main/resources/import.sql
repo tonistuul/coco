@@ -1,1 +1,1 @@
-INSERT INTO public.system_user(id, password, personal_code, username) VALUES(1, 'Wick', '123456789', 'John');
+INSERT INTO public.system_user(id, password, personal_code, username, first_name, last_name) VALUES(1, 'Wick', '123456789', 'John', 'John', 'Wick');

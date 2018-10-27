@@ -14,8 +14,7 @@ public class SystemUserService {
     this.systemUserRepository = systemUserRepository;
   }
 
-  public boolean authenticate(String personalCode, String password) {
-    SystemUser user = systemUserRepository.findFirstByPersonalCodeAndPassword(personalCode, password);
-    return user != null;
+  public SystemUser authenticate(String personalCode, String password) {
+    return systemUserRepository.findFirstByPersonalCodeAndPassword(personalCode, password);
   };
 }

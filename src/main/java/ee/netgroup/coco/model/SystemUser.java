@@ -14,6 +14,8 @@ public class SystemUser {
   private String username;
   private String password;
   private String personalCode;
+  private String firstName;
+  private String lastName;
 
   public Long getId() {
     return id;
@@ -45,5 +47,21 @@ public class SystemUser {
 
   public void setPersonalCode(String personalCode) {
     this.personalCode = personalCode;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
 }

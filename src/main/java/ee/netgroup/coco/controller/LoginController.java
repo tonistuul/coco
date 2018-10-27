@@ -2,6 +2,7 @@ package ee.netgroup.coco.controller;
 
 import ee.netgroup.coco.model.LoginRequest;
 import ee.netgroup.coco.model.PollRequest;
+import ee.netgroup.coco.model.SystemUser;
 import ee.netgroup.coco.model.UserIdentity;
 import ee.netgroup.coco.service.SmartId;
 import ee.netgroup.coco.service.SmartIdService;
@@ -34,11 +35,14 @@ public class LoginController {
 
   @CrossOrigin
   @PostMapping(path = "login", produces = {APPLICATION_JSON_VALUE})
-  public ResponseEntity login(
+  public ResponseEntity<SystemUser> login(
     @RequestBody LoginRequest loginRequest
   ) {
-    boolean authenticated = systemUserService.authenticate(loginRequest.getIdentityCode(), loginRequest.getPassword());
-    return authenticated ? new ResponseEntity<>(OK) : new ResponseEntity<>(FORBIDDEN);
+    SystemUser systemUser = systemUserService.authenticate(loginRequest.getIdentityCode(), loginRequest.getPassword());
+    if(systemUser != null){
+      return ResponseEntity.ok().body(systemUser);
+    }
+    return new ResponseEntity<>(FORBIDDEN);
   }
 
 
