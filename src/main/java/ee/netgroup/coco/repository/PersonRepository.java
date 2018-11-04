@@ -1,26 +1,30 @@
 package ee.netgroup.coco.repository;
 
-import ee.netgroup.coco.model.Person;
+import ee.netgroup.coco.configuration.PersonRegistryProperties;
+import ee.netgroup.coco.configuration.UXPProperties;
+import ee.netgroup.coco.configuration.UXPServiceProviderProperties;
 import ee.netgroup.coco.dto.PersonDto;
-import org.springframework.beans.factory.annotation.Value;
+import ee.netgroup.coco.model.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import static java.lang.String.format;
 
 @Repository
-public class PersonRepository {
+public class PersonRepository extends UXPRepository {
+  private static final String SERVICE_PERSONS = "persons";
+  private PersonRegistryProperties personRegistryProperties;
   private RestTemplate restTemplate;
-  private String personRegistryUrl;
 
-  public PersonRepository(RestTemplate restTemplate,
-                          @Value("${personRegistry.url}") String legalEntityRegistryUrl) {
+  public PersonRepository(PersonRegistryProperties personRegistryProperties, UXPProperties uxpProperties, RestTemplate restTemplate) {
+    super(uxpProperties);
+    this.personRegistryProperties = personRegistryProperties;
     this.restTemplate = restTemplate;
-    this.personRegistryUrl = legalEntityRegistryUrl;
   }
 
   public Person get(String personId) {
-    PersonDto dto = restTemplate.getForObject(personRegistryUrl + "/persons/{personId}", PersonDto.class, personId);
+    PersonDto dto = restTemplate.getForObject(getUrl(SERVICE_PERSONS, 1, personId), PersonDto.class);
+
     if (dto == null) {
       throw new RuntimeException(format("Failed to find person id: %s in person registry", personId));
     }
@@ -32,5 +36,10 @@ public class PersonRepository {
       .address(dto.getAddressId())
       .personId(dto.getCode())
       .build();
+  }
+
+  @Override
+  UXPServiceProviderProperties getServiceProviderProperties() {
+    return personRegistryProperties;
   }
 }

@@ -17,7 +17,20 @@ spring:
 logging.file: logs/coco.log
 logging.file.max-history: 20
 
-legalEntityRegistry:
-  url: http://africa.nortal.com/company-registry/api/v1
-personRegistry:
-  url: http://africa.nortal.com/person-registry
+uxp:
+  security-server: https://egov-demo-ss4.westeurope.cloudapp.azure.com/restapi
+  instance: EGOV-EXAMPLE
+  client:
+    member-class: GOV
+    member-code: M-JUSTICE
+    subsystem-code: CREC-REG
+
+person-registry:
+  member-class: GOV
+  member-code: M-HOMEAFFAIRS
+  subsystem-code: POP-REG
+
+business-registry:
+  member-class: GOV
+  member-code: M-HOMEAFFAIRS
+  subsystem-code: BUSINESS-REG
