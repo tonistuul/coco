@@ -6,7 +6,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:15434/coco
+    url: jdbc:postgresql://localhost:6969/coco
     username: coco
     password: cocodev
   jpa.show-sql: false

@@ -14,11 +14,13 @@ public class CaseService {
   private final CaseRepository caseRepository;
 
   public CourtCase saveCase(CourtCase courtCase) {
-    courtCase.setDateOfRegistration(LocalDate.now());
+    if (courtCase.getDateOfRegistration() != null) {
+      courtCase.setDateOfRegistration(LocalDate.now());
+    }
     return caseRepository.save(courtCase);
   }
 
-  public List<CourtCase> findall() {
+  public List<CourtCase> findAll() {
     return caseRepository.findAll();
   }
 }

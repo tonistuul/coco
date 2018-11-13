@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -40,19 +39,19 @@ public class CaseController {
 
   @GetMapping
   public Collection<CourtCase> findAll() {
-    List<CourtCase> findall = caseService.findall();
+    List<CourtCase> findAll = caseService.findAll();
     try {
-      return findall.stream().map(c -> {
+      return findAll.stream().peek(c -> {
         if (c.getClaimantId() != null && c.getDefendantId() != null) {
           c.setClaimant(legalEntityService.get(c.getClaimantId()));
           c.setDefendant(legalEntityService.get(c.getDefendantId()));
         }
-        return c;
       })
         .collect(toList());
     }
     catch (Exception e) {
-      return findall;
+      // Fallback to return partial data if persons api is unavailable
+      return findAll;
     }
   }
 
