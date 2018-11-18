@@ -59,4 +59,9 @@ public class CaseController {
   public CourtCase saveCase(@RequestBody CourtCase courtCase) {
     return caseService.saveCase(courtCase);
   }
+
+  @PutMapping("{id}")
+  public CourtCase updateCase(@PathVariable Long id, @RequestBody CourtCase courtCase) {
+    return caseService.updateCase(courtCase);
+  }
 }
