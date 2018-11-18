@@ -30,6 +30,10 @@ public class CourtCase {
   private String value;
   private String fee;
 
+  private String judgmentFormType;
+  private String judgmentDescription;
+  private Integer sanction;
+
   @Transient
   private LegalEntity claimant;
   @Transient

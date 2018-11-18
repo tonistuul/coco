@@ -20,6 +20,10 @@ public class CaseService {
     return caseRepository.save(courtCase);
   }
 
+  public CourtCase updateCase(CourtCase courtCase) {
+    return caseRepository.save(courtCase);
+  }
+
   public List<CourtCase> findAll() {
     return caseRepository.findAll();
   }
