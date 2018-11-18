@@ -25,7 +25,7 @@ public class HearingController {
   public ResponseEntity addHearing(@RequestBody Hearing hearing) {
     Hearing savedHearing = hearingService.saveHearing(hearing);
     if (savedHearing != null) {
-      ResponseEntity.created(null).body(savedHearing);
+      return ResponseEntity.created(null).body(savedHearing);
     }
 
     return ResponseEntity.badRequest().build();
