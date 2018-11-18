@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SystemUserRepository extends JpaRepository<SystemUser, Long> {
-  SystemUser findFirstByPersonalCodeAndPassword(String personalCode, String password);
+  SystemUser findFirstByPersonalCode(String personalCode);
 }

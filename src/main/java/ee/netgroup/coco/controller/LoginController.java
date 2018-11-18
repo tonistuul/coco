@@ -1,12 +1,9 @@
 package ee.netgroup.coco.controller;
 
-import ee.netgroup.coco.model.LoginRequest;
-import ee.netgroup.coco.model.PollRequest;
-import ee.netgroup.coco.model.SystemUser;
-import ee.netgroup.coco.model.UserIdentity;
+import ee.netgroup.coco.model.*;
 import ee.netgroup.coco.service.SmartId;
 import ee.netgroup.coco.service.SmartIdService;
-import ee.netgroup.coco.service.SystemUserService;
+import ee.netgroup.coco.service.AuthenticationService;
 import ee.sk.smartid.AuthenticationIdentity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,28 +20,24 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 public class LoginController {
 
-  private final SystemUserService systemUserService;
+  private final AuthenticationService authenticationService;
   private final SmartIdService smartIdService;
 
   @Autowired
-  public LoginController(SystemUserService systemUserService,
+  public LoginController(AuthenticationService authenticationService,
                          SmartIdService smartIdService) {
-    this.systemUserService = systemUserService;
+    this.authenticationService = authenticationService;
     this.smartIdService = smartIdService;
   }
 
   @CrossOrigin
   @PostMapping(path = "login", produces = {APPLICATION_JSON_VALUE})
-  public ResponseEntity<SystemUser> login(
+  public ResponseEntity<Person> login(
     @RequestBody LoginRequest loginRequest
   ) {
-    SystemUser systemUser = systemUserService.authenticate(loginRequest.getIdentityCode(), loginRequest.getPassword());
-    if(systemUser != null){
-      return ResponseEntity.ok().body(systemUser);
-    }
-    return new ResponseEntity<>(FORBIDDEN);
+    Person person = authenticationService.authenticate(loginRequest.getIdentityCode());
+    return person != null ? ResponseEntity.ok().body(person) : new ResponseEntity<>(FORBIDDEN);
   }
-
 
   @CrossOrigin
   @PostMapping(path = "smartid", produces = {APPLICATION_JSON_VALUE})
