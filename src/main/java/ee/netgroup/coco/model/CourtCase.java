@@ -1,5 +1,6 @@
 package ee.netgroup.coco.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -38,4 +39,15 @@ public class CourtCase {
   private LegalEntity claimant;
   @Transient
   private LegalEntity defendant;
+
+  @JsonIgnore
+  public String getBusinessRestrictedRegistryCode() {
+    if (sanction == 1) {
+      return claimantId;
+    }
+    else if (sanction == 2) {
+      return defendantId;
+    }
+    return null;
+  }
 }
