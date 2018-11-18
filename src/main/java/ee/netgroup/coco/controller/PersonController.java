@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -19,5 +20,10 @@ public class PersonController {
   @GetMapping("/{personId}")
   public Person getPerson(@PathVariable @NotNull String personId) {
     return personService.getPerson(personId);
+  }
+
+  @GetMapping
+  public List<Person> getAllPersons() {
+    return personService.getAllPersons();
   }
 }
