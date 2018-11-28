@@ -1,0 +1,32 @@
+version: "3.3"
+services:
+  coco:
+    image: cocoafrica/commercial-court:0.0.1
+#    container_name: coco
+    ports:
+      - 9701:9701
+    depends_on:
+      - postgres
+
+  coco-react:
+    image: cocoafrica/commercial-court-ui:0.0.1
+#    container_name: coco-react
+    ports:
+    - 80:80
+    depends_on:
+    - coco
+
+  postgres:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_USER: coco
+      POSTGRES_PASSWORD: cocodev
+    ports:
+    - 6969:5432
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+
+networks:
+  default:
+volumes:
+  postgres-data:
