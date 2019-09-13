@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -38,5 +39,9 @@ public class LegalEntityService {
 
   public void restrictBusiness(String businessRestrictedRegistryCode, String reason) {
     findAllBoardMembers(businessRestrictedRegistryCode).forEach(p -> UXPLegalEntityRepository.restrictBusiness(p.getPersonIdCode(), reason));
+  }
+
+  public List<LegalEntity> findAll() {
+    return LegalEntity.toLegalEntities(UXPLegalEntityRepository.findAll());
   }
 }
