@@ -23,7 +23,7 @@ public class PersonController {
   }
 
   @GetMapping
-  public List<Person> getAllPersons() {
-    return personService.getAllPersons();
+  public List<Person> findAll() {
+    return personService.findAll();
   }
 }

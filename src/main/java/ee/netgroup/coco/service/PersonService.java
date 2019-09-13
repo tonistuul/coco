@@ -22,8 +22,8 @@ public class PersonService {
     return result;
   }
 
-  public List<Person> getAllPersons() {
-    return personRepository.findAll();
+  public List<Person> findAll() {
+    return UXPPersonRepository.findAll();
   }
 
   Person save(Person person) {

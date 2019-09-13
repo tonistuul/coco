@@ -8,6 +8,8 @@ import ee.netgroup.coco.model.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 import static java.lang.String.format;
 
 @Repository
@@ -41,5 +43,18 @@ public class UXPPersonRepository extends UXPRepository {
   @Override
   UXPServiceProviderProperties getServiceProviderProperties() {
     return personRegistryProperties;
+  }
+
+  public List<Person> findAll() {
+    PersonDto dto = restTemplate.getForObject(getUrl(SERVICE_PERSONS, 1, null), PersonDto.class);
+
+//    return Person.builder()
+//      .firstName(dto.getGivenName())
+//      .lastName(dto.getFamilyName())
+//      .dateOfBirth(dto.getBirthday())
+//      .address(dto.getAddressId())
+//      .personId(dto.getCode())
+//      .build();
+    return null;
   }
 }
