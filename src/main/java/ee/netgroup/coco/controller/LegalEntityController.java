@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -19,5 +20,10 @@ public class LegalEntityController {
   @GetMapping("/{entityId}")
   public LegalEntity getLegalEntity(@PathVariable @NotNull String entityId) {
     return legalEntityService.get(entityId);
+  }
+
+  @GetMapping()
+  public List<LegalEntity> findAll() {
+    return legalEntityService.findAll();
   }
 }

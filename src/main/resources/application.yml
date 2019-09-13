@@ -18,7 +18,7 @@ logging.file: logs/coco.log
 logging.file.max-history: 20
 
 uxp:
-  security-server: https://egov-demo-ss4.westeurope.cloudapp.azure.com/restapi
+  security-server: https://egov-demo-ss1.westeurope.cloudapp.azure.com/restapi
   instance: EGOV-EXAMPLE
   client:
     member-class: GOV

@@ -4,11 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,6 +32,10 @@ public class CourtCase {
   private String judgmentFormType;
   private String judgmentDescription;
   private Integer sanction;
+
+  @OneToMany
+  @JoinColumn(name = "case_id", nullable = false)
+  private List<Document> documents;
 
   @Transient
   private LegalEntity claimant;

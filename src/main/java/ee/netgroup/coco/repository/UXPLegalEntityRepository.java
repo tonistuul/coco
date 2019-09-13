@@ -49,6 +49,10 @@ public class UXPLegalEntityRepository extends UXPRepository {
     return businessRegistryProperties;
   }
 
+  public LegalEntityDto[] findAll() {
+    return restTemplate.getForObject(getUrl(SERVICE_COMPANIES, 1, null), LegalEntityDto[].class);
+  }
+
   @AllArgsConstructor
   @Data
   class BusinessRestriction {
