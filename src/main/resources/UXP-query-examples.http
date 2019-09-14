@@ -1,0 +1,16 @@
+GET https://egov-demo-ss1.westeurope.cloudapp.azure.com/restapi/?xRoadInstance=EGOV-EXAMPLE&memberClass=GOV&memberCode=M-HOMEAFFAIRS&subsystemCode=POP-REG&serviceCode=persons&serviceVersion=1&dateFrom=2018-09-13T19:20:11
+Accept: */*
+Uxp-Client: EGOV-EXAMPLE/GOV/M-JUSTICE/CREC-REG
+
+
+###
+
+# curl --location --request GET "https://egov-demo-ss1.westeurope.cloudapp.azure.com/restapi/70102010000?xRoadInstance=EGOV-EXAMPLE&memberClass=GOV&memberCode=M-HOMEAFFAIRS&subsystemCode=POP-REG&serviceCode=persons&serviceVersion=1"
+#  --header "Accept: application/json;charset=UTF-8"
+#  --header "Uxp-Client: EGOV-EXAMPLE/COM/HOSPITAL/PRESCRIPTIONS"
+GET https://egov-demo-ss1.westeurope.cloudapp.azure.com/restapi/36506542565?xRoadInstance=EGOV-EXAMPLE&memberClass=GOV&memberCode=M-HOMEAFFAIRS&subsystemCode=POP-REG&serviceCode=persons&serviceVersion=1
+Accept: */*
+Uxp-Client: EGOV-EXAMPLE/COM/HOSPITAL/PRESCRIPTIONS
+
+###
+
