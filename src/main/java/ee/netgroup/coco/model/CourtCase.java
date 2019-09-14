@@ -33,7 +33,7 @@ public class CourtCase {
   private String judgmentDescription;
   private Integer sanction;
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   @JoinColumn(name = "case_id", nullable = false)
   private List<Document> documents;
 

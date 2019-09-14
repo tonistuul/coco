@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.sql.Date;
 
 @Entity
 @Data
@@ -16,4 +17,6 @@ public class Document {
   @GeneratedValue
   private Long id;
   private String name;
+  private String addedBy;
+  private String modified;
 }
