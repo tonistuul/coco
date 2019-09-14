@@ -8,9 +8,14 @@ import ee.netgroup.coco.model.Person;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.String.format;
+import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpMethod.GET;
 
 @Repository
 public class UXPPersonRepository extends UXPRepository {
@@ -25,7 +30,13 @@ public class UXPPersonRepository extends UXPRepository {
   }
 
   public Person get(String personId) {
-    PersonDto dto = restTemplate.getForObject(getUrl(SERVICE_PERSONS, 1, personId), PersonDto.class);
+    PersonDto dto = restTemplate.exchange(
+      getUrl(SERVICE_PERSONS, 1, personId),
+      GET,
+      getHeadersEntity(),
+      PersonDto.class
+    )
+      .getBody();
 
     if (dto == null) {
       throw new RuntimeException(format("Failed to find person id: %s in person registry", personId));
@@ -46,15 +57,24 @@ public class UXPPersonRepository extends UXPRepository {
   }
 
   public List<Person> findAll() {
-    PersonDto dto = restTemplate.getForObject(getUrl(SERVICE_PERSONS, 1, null), PersonDto.class);
+//    Map<String, LocalDateTime> time = new HashMap<>();
+    //time.put("dateFrom", LocalDateTime.of(1900, 1, 1, 1, 1));
+    PersonDto[] result = restTemplate.exchange(
+      getUrl(SERVICE_PERSONS, 1, LocalDateTime.of(1900, 1, 1, 1, 1).toString()),
+      GET,
+      getHeadersEntity(),
+      PersonDto[].class
+    )
+      .getBody();
 
-//    return Person.builder()
-//      .firstName(dto.getGivenName())
-//      .lastName(dto.getFamilyName())
-//      .dateOfBirth(dto.getBirthday())
-//      .address(dto.getAddressId())
-//      .personId(dto.getCode())
-//      .build();
-    return null;
+    return result == null ? emptyList() : Arrays.stream(result)
+      .map(dto -> Person.builder()
+        .firstName(dto.getGivenName())
+        .lastName(dto.getFamilyName())
+        .dateOfBirth(dto.getBirthday())
+        .address(dto.getAddressId())
+        .personId(dto.getCode())
+        .build())
+      .collect(toList());
   }
 }

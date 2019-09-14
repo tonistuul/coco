@@ -14,6 +14,7 @@ import java.util.Collection;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static org.springframework.http.HttpMethod.GET;
 
 @Repository
 public class UXPLegalEntityRepository extends UXPRepository {
@@ -31,26 +32,52 @@ public class UXPLegalEntityRepository extends UXPRepository {
   }
 
   public Collection<String> findRelatedEntityIds(String representativeId) {
-    String[] result = restTemplate.getForObject(getUrl(SERVICE_COMPANIES, 1, format("byPerson/%s", representativeId)), String[].class);
+    String[] result = restTemplate.exchange(
+      getUrl(SERVICE_COMPANIES, 1, format("byPerson/%s", representativeId)),
+      GET,
+      getHeadersEntity(),
+      String[].class
+    )
+      .getBody();
 
     return result == null ? emptyList() : asList(result);
   }
 
   public void restrictBusiness(String personalCode, String reason) {
-    restTemplate.postForObject(getUrl(SERVICE_RESTRICTION, 1, null), new BusinessRestriction(personalCode, reason), String.class);
+    // TODO: Not working on business registry side after UXP security server migration
+//    HttpEntity<BusinessRestriction> requestEntity = new HttpEntity<>(new BusinessRestriction(personalCode, reason), getHeaders());
+//
+//    restTemplate.exchange(
+//      getUrl(SERVICE_RESTRICTION, 1, null),
+//      POST,
+//      requestEntity,
+//      String.class
+//    );
   }
 
   public LegalEntityDto get(String registryCode) {
-    return restTemplate.getForObject(getUrl(SERVICE_COMPANIES, 1, registryCode), LegalEntityDto.class);
+    return restTemplate.exchange(
+      getUrl(SERVICE_COMPANIES, 1, registryCode),
+      GET,
+      getHeadersEntity(),
+      LegalEntityDto.class
+    )
+      .getBody();
+  }
+
+  public LegalEntityDto[] findAll() {
+    return restTemplate.exchange(
+      getUrl(SERVICE_COMPANIES, 1, null),
+      GET,
+      getHeadersEntity(),
+      LegalEntityDto[].class
+    )
+      .getBody();
   }
 
   @Override
   UXPServiceProviderProperties getServiceProviderProperties() {
     return businessRegistryProperties;
-  }
-
-  public LegalEntityDto[] findAll() {
-    return restTemplate.getForObject(getUrl(SERVICE_COMPANIES, 1, null), LegalEntityDto[].class);
   }
 
   @AllArgsConstructor
