@@ -20,6 +20,7 @@ import static org.springframework.http.HttpMethod.GET;
 @Repository
 public class UXPPersonRepository extends UXPRepository {
   private static final String SERVICE_PERSONS = "persons";
+  private static final String FIND_ALL_PARAMS = "&&dateFrom=" + LocalDateTime.of(1900, 1, 1, 1, 1).toString();
   private PersonRegistryProperties personRegistryProperties;
   private RestTemplate restTemplate;
 
@@ -57,10 +58,8 @@ public class UXPPersonRepository extends UXPRepository {
   }
 
   public List<Person> findAll() {
-//    Map<String, LocalDateTime> time = new HashMap<>();
-    //time.put("dateFrom", LocalDateTime.of(1900, 1, 1, 1, 1));
     PersonDto[] result = restTemplate.exchange(
-      getUrl(SERVICE_PERSONS, 1, LocalDateTime.of(1900, 1, 1, 1, 1).toString()),
+      getUrl(SERVICE_PERSONS, 1, null) + FIND_ALL_PARAMS,
       GET,
       getHeadersEntity(),
       PersonDto[].class
