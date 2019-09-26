@@ -26,4 +26,9 @@ public class PersonController {
   public List<Person> findAll() {
     return personService.findAll();
   }
+
+  @GetMapping("/byCompanyCode/{companyCode}")
+  public List<Person> findBoardMembersByCompanyCode(@PathVariable @NotNull String companyCode) {
+    return personService.findAllByCompanyCode(companyCode);
+  }
 }
