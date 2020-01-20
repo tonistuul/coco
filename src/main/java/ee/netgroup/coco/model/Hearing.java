@@ -3,10 +3,7 @@ package ee.netgroup.coco.model;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,6 +18,7 @@ public class Hearing {
   private LocalDateTime startTime;
   private LocalDateTime endTime;
   private String judge;
-  @ManyToMany
-  private List<Person> participants;
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "hearing_id", nullable = false)
+  private List<HearingParticipant> participants;
 }
