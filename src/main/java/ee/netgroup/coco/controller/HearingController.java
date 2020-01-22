@@ -30,4 +30,9 @@ public class HearingController {
 
     return ResponseEntity.badRequest().build();
   }
+
+  @GetMapping("/byCase/{caseNumber}")
+  public Collection<Hearing> findAllByCase(@PathVariable @NotNull String caseNumber) {
+    return hearingService.getHearingsByCase(caseNumber);
+  }
 }

@@ -24,4 +24,8 @@ public class HearingService {
   public List<Hearing> getHearings(String personalCode) {
     return repository.findHearingsByParticipantsPersonId(personalCode);
   }
+  
+  public List<Hearing> getHearingsByCase(String caseNumber) {
+    return repository.findHearingByCaseNumber(caseNumber);
+  }
 }

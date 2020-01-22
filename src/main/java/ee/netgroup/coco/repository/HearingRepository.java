@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface HearingRepository extends JpaRepository<Hearing, Long> {
   List<Hearing> findHearingsByParticipantsPersonId(String person);
+  List<Hearing> findHearingByCaseNumber(String caseNumber);
 }
