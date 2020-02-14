@@ -15,7 +15,7 @@ public class HearingParticipant {
   @Id
   @GeneratedValue
   private Long id;
-  private Long personId;
+  private String personId;
 
 
 }

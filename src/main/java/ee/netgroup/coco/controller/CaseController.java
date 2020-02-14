@@ -24,17 +24,7 @@ public class CaseController {
 
   @GetMapping("/byPerson/{personId}")
   public Collection<CourtCase> findAllByPerson(@PathVariable @NotNull String personId) {
-    return asList(
-      CourtCase.builder()
-        .caseNumber("112-CIVI-2018")
-        .claimantId(personId)
-        .dateOfRegistration(LocalDate.now())
-        .defendantId("asdads")
-        .judge("Judy")
-        .status("PENDING")
-        .caseType("Contract dispute")
-        .build()
-    );
+    return caseService.getAllCourtCasesForPerson(personId);
   }
 
   @GetMapping
